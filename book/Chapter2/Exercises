@@ -1,0 +1,44 @@
+## Section 2.2.-2.5
+
+R10. An handshaking protocol is a protocol which requires first the two parts to "introduce" each others. For example TCP does it (it is not a n application level protocol)
+
+R11. TCP provides relaiability in many terms, among which there is time-reliability, and data-reception reliability. HTTP, SMTP and IMAP all require to be sure this reliability, which is not provided by UDP.
+
+R12. The website asks the customers if they have a cookie to give when they connect. If the customers/clients do not have such cookie, then the website will assign one of them to the client, and will declare it. When the customer visits the website again he will give back the received cookie, and the server will be able to understand the identity of the visitor. The precise keywords in the HTTP requests are retrievable from the book. I anayway suspect (the book did not state it) that each cookie will be given with a password or smt similar, otherwise somebody could, just with a message `Cookie 1234`, pretend to be somebody else and access her data.
+
+R13. Web caching is a simple idea: save the objects that the user previously requested. This is implemented by a proxy server. Basically the proxy server does not go to retrieve such objects back to the original server every time, but it does tell to the original server "give me the object only if it did change since the time t" (conditional HTTP  request). If the resource changed it is provided, otherwise a message says that it did not change.
+
+R14. see the folder
+
+R15. whatsapp, telegram, signal. Whatsapp and Signla use the same protocol, which is end-to-end encrypted, while telegram uses a special protocol developed by pavel durov
+
+R16. Alice connects to the mail server via an HTTP connection or an SMTP protocol and instructs it to send an email to Bob. The email server of alice connects as a client to the email server of Bob, and sends the email via the SMTP protocol. Finally Bob accesses his server with the IMAP protocol and retrieves his emails. In the past he would have done this with the POP3 protocol. It is important to specify one thing: in an email address we have the structure user@domain, because a single mail server might have multiple users.
+
+R17. A message from my professor. Effectively there were many `Received:` statements, from many `different` recipients. I guess the point of the question is asking yourself `why?`. Online is being said that it depends on how many servers in the middle are passing the mail to each others, and guessing form this header my uni pass the email through a lot of servers.
+
+R18. This is interesting. HOL means basically that a big object delays the delivery of the subsequent objects, even if they are small. Then HTTP 2.0 basically slices every object in small pieces and deliver a piece of each object for every turn. The small objects will then be favoured by this and the HOL problem is somehow avoided. Besides the HTTP 2.0 has other optimization techniques.
+
+R19. It is possible, they are simply domain alias. In the case of the email the resource is of Type MX, and the Name is the alias (eg foo.com) while the Value is the canonical name (foo.mail.server.bar.com).
+
+R20. I watched the header of my email to serach for a domainname and then I typed on the terminal `nslookup` and I got the IP. With google I have done it as well and it seems that it works fine as well.
+
+## section 2.5-2.6
+
+R21. Bob gives priority to send his chunks to his top 4 contributors + a randomly selected peer (updated every 10 seconds). Alice follows the same procedure, thus if it sent her file to Bob more than 30 sec in a row, we can suppose that Bob was among her best 4 contributors during 3 intervals. This makes us think that probably Bob and Alice found each others among their top 4 contributors for 3 times, and thus have compatible ratios to send files.
+
+R22. Alice will get her first chunk by being the 'optimistically unchoked', i.e. the randomly selected peer to send files to. Besides, in the book it is written that the top 4 contributors receive a priority, but not that they are the only ones receiving the file, thus there might be also some second level contribution.
+
+R23. I found no other quotes of 'overlay network' in the book, I guess it is some online content, maybe in the section regarding the DHT.
+
+## section 2.6
+
+R24. `Enter deep`: Near the hosts, i.e. as locally as possible (difficult to maintain) or `Bring Home`: near the house (i.e. the servers owning the product to distribute), which is easier to maintain but might give the clients a slower performance (waiting for the buffering)
+
+R25. DNS redirection, but most of all the `cluster selection strategy`. In fact to exploit the power of the CDN we must distribute effectively the requests (received through the manifest file) to the appropriate local cluster servers. This is usually done in two main ways: regarding a measure of closer as a geographically closer (might not be accurate) or as closer wrt to the approximate time measured with various pings to various local DNS server (might not be accurate because the local DNS might have a firewall software which prevent them from actually answering to ping requests).
+
+## section 2.7
+
+r26: in UDP we have no connection, we send packets and we receive them, as simple as that, whereas in the TCP connection we esblish such connection, and thus a server needs a way to communicate independently and separate with each TCP client. How do we do that? We have a welcoming socket, kind of the reception of an hotel (or the 'centralino' in the telephone) which tells the clients which effective socket can the yuse to connect. This implies that if we have n TCP connection, we have n+1 sockets in the server (the welcoming, plus the other n connected sockets)
+
+r27: UDP: we send the packets, maybe somebody will receive them, i.e. for what I think I have understood, the UDP server might start later, the important thing is that it is awake in the moment in which the packages are delivered to it. TCP: we need to establish a connection, thus the server must be awake to tell the client which socket can they use to speak with him.
+

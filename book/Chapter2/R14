@@ -1,0 +1,28 @@
+I must write a conditional http-request
+I choose https://en.wikipedia.org/wiki/Stochastic_calculus
+
+I first connect with
+
+telnet nameofthewebsite 80
+
+and then I write:
+
+GET /wiki/Stochastic_calculus HTTP/1.1
+Host: en.wikipedia.org
+If-modified-since: Mon, 6 Nov 2023 09:23:24
+Connection: close
+User-agent: Mozilla/5.0
+
+I continously receive the message 301 moved permanently, and I suspect that this is related to the usage of https and not http
+
+I was right, the answer is here: https://stackoverflow.com/questions/74646764/always-301-moved-permanently
+
+I try like this
+
+telnet example.com 80
+
+GET / HTTP/1.1
+Host: example.com
+If-modified-since: Mon, 6 Nov 2023 09:23:24
+Connection: close
+User-agent: Mozilla/5.0
