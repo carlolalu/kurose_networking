@@ -1,6 +1,6 @@
 # 'a top down approach'
 
-Bookmark (ch.section(.subsection)): Problems chapter 2
+Bookmark (ch.section(.subsection)): 3.3 - do summary exercises
 
 
 in a distant future: learn to manage sockets with rust (chapter 20 of the-book)
